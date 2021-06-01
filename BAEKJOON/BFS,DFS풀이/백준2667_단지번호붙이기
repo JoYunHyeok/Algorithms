@@ -1,0 +1,43 @@
+n = int(input()) # 지도의 크기
+
+graph = []
+for _ in range(n):
+    graph.append(list(map(int, input())))
+
+cnt = 0 # 단지내 집의 수 카운트
+cnt_list = [] # 하나의 단지내 집의 수를 담을 리스트
+
+#dfs, 스택, 재귀
+def dfs(x, y):
+    global cnt
+    if x <= -1 or x >= n or y <= -1 or y >= n:
+        return False
+
+    if graph[x][y] == 1:
+        cnt += 1 # 집인경우 +1
+        graph[x][y] = 0 # 탐색한 것은 0으로 변경(원활한 재귀 종료를 위함)
+        dfs(x-1, y) # 상
+        dfs(x+1, y) # 하
+        dfs(x, y-1) # 좌
+        dfs(x, y+1) # 우
+        return True
+    return False
+
+result = 0
+for i in range(n):
+    for j in range(n):
+        if dfs(i,j) == True:
+            result += 1
+            cnt_list.append(cnt)
+            cnt = 0
+
+cnt_list.sort() # 지문에 오름차순 요구
+print(result) # 단지 수 출력
+print(*cnt_list, sep='\n') # 리스트의 요소를 하나씩 줄바꿈하여 출력
+
+
+
+
+
+
+
