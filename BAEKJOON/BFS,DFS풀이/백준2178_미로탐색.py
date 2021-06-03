@@ -1,32 +1,75 @@
-# bfs, deque
+# # bfs, deque
+# from collections import deque
+# from sys import stdin
+#
+# n, m = map(int, stdin.readline().split()) # n, m 입력받기
+#
+# graph = [] # 2차원 배열로 nxm크기의 미로생성
+# for _ in range(n):
+#     graph.append(list(map(int, stdin.readline().strip())))
+#
+# # 상하좌우
+# h = [-1, 1, 0, 0]
+# w = [0, 0, -1, 1]
+#
+# def bfs(x,y):
+#     queue = deque()
+#     queue.append((x,y))
+#
+#     while queue:
+#         x, y = queue.popleft()
+#         for d in range(4): #상하좌우
+#             xh = x + h[d]
+#             yw = y + w[d]
+#             if 0 <= xh < n and 0 <= yw < m:
+#                 if graph[xh][yw] == 1: # 이동할 수 있는 '1'칸을 만족한다면 +1을 해준다.
+#                     graph[xh][yw] = graph[x][y] + 1
+#                     queue.append((xh,yw))
+#
+#     return graph[n-1][m-1] # 목적지n, m의 값 출력:
+#
+# print(bfs(0,0))
+
+
+
 from collections import deque
-from sys import stdin
 
-n, m = map(int, stdin.readline().split()) # n, m 입력받기
+m, n = map(int, input().split())
+s = []
+queue = deque()
+dx = [1, -1, 0, 0]
+dy = [0, 0, -1, 1]
+for i in range(n):
+    s.append(list(map(int, input().split())))
 
-graph = [] # 2차원 배열로 nxm크기의 미로생성
-for _ in range(n):
-    graph.append(list(map(int, stdin.readline().strip())))
 
-# 상하좌우
-h = [-1, 1, 0, 0]
-w = [0, 0, -1, 1]
-
-def bfs(x,y):
-    queue = deque()
-    queue.append((x,y))
-
+def bfs():
     while queue:
-        x, y = queue.popleft()
-        for d in range(4): #상하좌우
-            xh = x + h[d]
-            yw = y + w[d]
-            if 0 <= xh < n and 0 <= yw < m:
-                if graph[xh][yw] == 1: # 이동할 수 있는 '1'칸을 만족한다면 +1을 해준다.
-                    graph[xh][yw] = graph[x][y] + 1
-                    queue.append((xh,yw))
+        a, b = queue.popleft()
+        for i in range(4):
+            x = a + dx[i]
+            y = b + dy[i]
+            if 0 <= x < n and 0 <= y < m and s[x][y] == 0:
+                s[x][y] = s[a][b] + 1
+                queue.append([x, y])
 
-    return graph[n-1][m-1] # 목적지n, m의 값 출력
 
-print(bfs(0,0))
-
+for i in range(n):
+    for j in range(m):
+        if s[i][j] == 1:
+            queue.append([i, j])
+bfs()
+print(s)
+isTrue = False
+result = -2
+for i in s:
+    for j in i:
+        if j == 0:
+            isTrue = True
+        result = max(result, j)
+if isTrue == True:
+    print(-1)
+elif result == -1:
+    print(0)
+else:
+    print(result - 1)
