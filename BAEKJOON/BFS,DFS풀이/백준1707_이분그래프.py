@@ -17,14 +17,14 @@ def bfs(start):
     return True
 
 
-k = stdin.readline()
+k = int(stdin.readline())
 for _ in range(k):
-    v, e = stdin.readline().split()
+    v, e = map(int, stdin.readline().split())
     isTrue = True
     graph = [[] for _ in range(v+1)] # 정점과 간선 정보를 가지고 그래프를 생성
     visit = [0 for _ in range(v+1)] # 이분그래프를 판별하기 위한 그래프
     for _ in range(e):
-        a ,b = stdin.readline().split()
+        a ,b = map(int,stdin.readline().split())
         graph[a].append(b)
         graph[b].append(a)
     for y in range(1, v+1):

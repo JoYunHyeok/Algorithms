@@ -17,7 +17,7 @@ def bfs():
             print(graph[x])
             break
         for dx in [x-1, x+1, x*2]: # 이동할 수 있는 세가지 경우
-            if 0 <= dx < MAX and graph[dx] == 0:
+            if 0 <= dx <= MAX and graph[dx] == 0:
                 graph[dx] = graph[x] + 1 # 1초씩 증가
                 queue.append(dx)
 
