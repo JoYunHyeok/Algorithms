@@ -1,0 +1,6 @@
+from sys import stdin
+
+num_list = list(map(int, stdin.readline().strip()))
+num_list.sort(reverse=True)
+for num in num_list:
+    print(num, end='')
