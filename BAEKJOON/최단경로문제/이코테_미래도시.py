@@ -40,9 +40,3 @@ if distance >= INF:
 # 도달할 수 있다면, 최단 거리를 출력
 else:
     print(distance)
-
-
-
-
-
-
