@@ -287,6 +287,9 @@ for _ in range(e):
     # 진입 차수를 1 증가
     indegree[b] += 1
 
+print(graph)
+print(indegree)
+
 def topology_sort():
     result = [] # 알고리즘 수행 결과를 담을 리스트
     q = deque() # 큐 기능을 위한 deque 라이브러리 사용
@@ -305,9 +308,9 @@ def topology_sort():
             # 새롭게 진입차수가 0이 되는 노드를 큐에 삽입
             if indegree[i] == 0:
                 q.append(i)
-        # 위상 정렬을 수행한 결과 출력
-        for i in result:
-            print(i, end=' ')
+    # 위상 정렬을 수행한 결과 출력
+    for i in result:
+        print(i, end=' ')
 
 topology_sort()
 
