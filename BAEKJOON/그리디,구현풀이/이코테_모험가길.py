@@ -18,4 +18,4 @@ for i in n_list:
 
 print(result)
 
-
+# 1 2 2 2 3
