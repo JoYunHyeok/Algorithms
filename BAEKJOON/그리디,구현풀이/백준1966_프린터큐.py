@@ -1,5 +1,4 @@
 from sys import stdin
-
 input = stdin.readline
 t = int(input())
 
@@ -7,8 +6,8 @@ for _ in range(t):
     n, m = map(int, input().split())
     queue = list(map(int, input().split()))
     queue = [(i, idx) for idx, i in enumerate(queue)]
-
     count = 0
+
     while True:
 
         if queue[0][0] == max(queue, key=lambda x: x[0])[0]: # 현재 리스트에서 중요도가 제일 큰 수가 올때까지 회전
