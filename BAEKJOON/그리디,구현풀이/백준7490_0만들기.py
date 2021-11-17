@@ -18,19 +18,17 @@ def recurcive(array, n):
     array.pop()
 
 t = int(input())
-
 for _ in range(t):
-    operators_list = []
     n = int(input())
-    recurcive([], n-1)
-
-    integers = [i for i in range(1, n+1)]
+    operators_list = []
+    recurcive([], n - 1)
+    integer = [i for i in range(1, n+1)]
 
     for operator in operators_list:
         string = ""
-        for i in range(n - 1):
-            string += str(integers[i]) + operator[i]
-        string += str(integers[-1])
+        for i in range(n-1):
+            string += str(integer[i]) + operator[i]
+        string += str(integer[-1])
 
         if eval(string.replace(" ", "")) == 0:
             print(string)
