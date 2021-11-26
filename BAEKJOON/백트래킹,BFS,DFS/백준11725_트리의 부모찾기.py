@@ -5,7 +5,7 @@ graph = [[] for _ in range(n + 1)]
 parent = [[] for _ in range(n + 1)]
 
 # 트리를 그래프 형태로 생성
-
+# 핵심은 인접리스트를 만들어서 방문마다 자식녿의 부모노드를 지워주는것!!!
 for _ in range(n - 1):
     i, j = map(int, sys.stdin.readline().split())
     graph[i].append(j)
