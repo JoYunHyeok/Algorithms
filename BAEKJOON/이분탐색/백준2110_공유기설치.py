@@ -1,3 +1,8 @@
+'''
+1. 데이터의 갯수가 10억이상이면 이진탐색 고려하기
+2. 이진탐색은 재귀, 반복문으로 풀 수 있고 반복문이 유리하다.
+'''
+
 from sys import stdin
 
 n, c = map(int, stdin.readline().split())
