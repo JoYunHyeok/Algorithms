@@ -1,4 +1,4 @@
-# 백준2606 바이러스
+# # 백준2606 바이러스
 # from collections import deque
 #
 # n = int(input())
@@ -26,13 +26,13 @@
 #     print(cnt)
 #
 # bfs(1)
-
-# 백준1260 DFS와 BFS
-# 단, 방문할 수 있는 정점이 여러 개인 경우에는 정점 번호가 작은 것을 먼저 방문하고,
-# 인접리스트로 하면 위의 조건에 걸린다. 인접행렬로 풀어야한다.
-from collections import deque
-from sys import stdin
-
+#
+# # 백준1260 DFS와 BFS
+# # 단, 방문할 수 있는 정점이 여러 개인 경우에는 정점 번호가 작은 것을 먼저 방문하고,
+# # 인접리스트로 하면 위의 조건에 걸린다. 인접행렬로 풀어야한다.
+# from collections import deque
+# from sys import stdin
+#
 # n, m, v = map(int, stdin.readline().split())
 # graph = [[0] * (n+1) for _ in range(n+1)] # 인접행렬
 #
@@ -68,22 +68,22 @@ from sys import stdin
 # dfs(graph, v)
 # print()
 # bfs(graph, v)
-
-
-#백준11725 트리의 부모찾기
-from collections import deque
-
-n = int(input())
-
-graph = [[] for _ in range(n+1)]
-root = [[] for _ in range(n+1)]
-
-for _ in range(n-1):
-    a, b = map(int, input().split())
-    graph[a].append(b)
-    graph[b].append(a)
-
-visited = [False] * (n+1)
+#
+#
+# #백준11725 트리의 부모찾기
+# from collections import deque
+#
+# n = int(input())
+#
+# graph = [[] for _ in range(n+1)]
+# root = [[] for _ in range(n+1)]
+#
+# for _ in range(n-1):
+#     a, b = map(int, input().split())
+#     graph[a].append(b)
+#     graph[b].append(a)
+#
+# visited = [False] * (n+1)
 
 # def bfs(v):
 #     queue = deque([v])
@@ -94,17 +94,137 @@ visited = [False] * (n+1)
 #             queue.append(i)
 #             graph[i].remove(node)
 # bfs(1)
+#
+# def dfs(v):
+#     stack = [v]
+#     while stack:
+#         node = stack.pop()
+#         for i in graph[node]:
+#             root[i].append(node)
+#             stack.append(i)
+#             graph[i].remove(node)
+# dfs(1)
+#
+# for i in range(2, len(root)):
+#     print(root[i][0])
 
-def dfs(v):
-    stack = [v]
-    while stack:
-        node = stack.pop()
-        for i in graph[node]:
-            root[i].append(node)
-            stack.append(i)
-            graph[i].remove(node)
-dfs(1)
+# #미로탐색
+# from sys import stdin
+# from collections import deque
+# input = stdin.readline
+#
+# n, m = map(int, input().split())
+# graph = []
+# for _ in range(n):
+#     graph.append(list(map(int, input().strip())))
+#
+# dy = [-1, 1, 0, 0]
+# dx = [0, 0, -1, 1]
+#
+# def bfs(i, j):
+#     queue = deque()
+#     queue.append((i, j))
+#     while queue:
+#         y, x = queue.popleft()
+#         for l in range(4):
+#             yy = dy[l] + y
+#             xx = dx[l] + x
+#             if 0 <= yy < n and 0 <= xx < m and graph[yy][xx] == 1:
+#                 graph[yy][xx] = graph[y][x] + 1
+#                 queue.append([yy, xx])
+#
+#
+# bfs(0,0)
+# print(graph[n-1][m-1])
 
-for i in range(2, len(root)):
-    print(root[i][0])
+
+# 2667 단지번호 붙이기
+# 1에서 0으로 변할때마다 cnt += 1
+'''
+예외예시
+3
+000
+001
+000
+'''
+from collections import deque
+from sys import stdin
+
+input = stdin.readline
+
+n = int(input())
+graph = []
+for _ in range(n):
+    graph.append(list(map(int, input().strip())))
+
+dy = [-1, 1, 0, 0]
+dx = [0, 0, -1, 1]
+
+def bfs(i, j):
+    queue = deque()
+    queue.append((i, j))
+    graph[i][j] = 0
+    cnt = 1
+    while queue:
+        y, x = queue.popleft()
+        for l in range(4):
+            yy = dy[l] + y
+            xx = dx[l] + x
+            if 0 <= yy < n and 0 <= xx < n and graph[yy][xx] == 1:
+                graph[yy][xx] = 0
+                queue.append((yy, xx))
+                cnt += 1
+    return cnt
+
+result = []
+for i in range(n):
+    for j in range(n):
+        if graph[i][j] == 1:
+            result.append(bfs(i,j))
+
+result.sort()
+print(len(result))
+print(*result, sep='\n')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

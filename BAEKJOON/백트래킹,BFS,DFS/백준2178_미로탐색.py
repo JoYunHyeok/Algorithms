@@ -73,3 +73,32 @@ elif result == -1:
     print(0)
 else:
     print(result - 1)
+
+
+# from sys import stdin
+# from collections import deque
+# input = stdin.readline
+#
+# n, m = map(int, input().split())
+# graph = []
+# for _ in range(n):
+#     graph.append(list(map(int, input().strip())))
+#
+# dy = [-1, 1, 0, 0]
+# dx = [0, 0, -1, 1]
+#
+# def bfs(i, j):
+#     queue = deque()
+#     queue.append((i, j))
+#     while queue:
+#         y, x = queue.popleft()
+#         for l in range(4):
+#             yy = dy[l] + y
+#             xx = dx[l] + x
+#             if 0 <= yy < n and 0 <= xx < m and graph[yy][xx] == 1:
+#                 graph[yy][xx] = graph[y][x] + 1
+#                 queue.append([yy, xx])
+#
+#
+# bfs(0,0)
+# print(graph[n-1][m-1])
