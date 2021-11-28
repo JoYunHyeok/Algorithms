@@ -150,41 +150,90 @@
 from collections import deque
 from sys import stdin
 
-input = stdin.readline
+# input = stdin.readline
+#
+# n = int(input())
+# graph = []
+# for _ in range(n):
+#     graph.append(list(map(int, input().strip())))
+#
+# dy = [-1, 1, 0, 0]
+# dx = [0, 0, -1, 1]
+#
+# def bfs(i, j):
+#     queue = deque()
+#     queue.append((i, j))
+#     graph[i][j] = 0
+#     cnt = 1
+#     while queue:
+#         y, x = queue.popleft()
+#         for l in range(4):
+#             yy = dy[l] + y
+#             xx = dx[l] + x
+#             if 0 <= yy < n and 0 <= xx < n and graph[yy][xx] == 1:
+#                 graph[yy][xx] = 0
+#                 queue.append((yy, xx))
+#                 cnt += 1
+#     return cnt
+#
+# result = []
+# for i in range(n):
+#     for j in range(n):
+#         if graph[i][j] == 1:
+#             result.append(bfs(i,j))
+#
+# result.sort()
+# print(len(result))
+# print(*result, sep='\n')
 
-n = int(input())
+#백준7576 토마토
+from collections import deque
+from sys import stdin
+input = stdin.readline
+m, n = map(int, input().split())
 graph = []
 for _ in range(n):
-    graph.append(list(map(int, input().strip())))
+    graph.append(list(map(int, input().split())))
 
 dy = [-1, 1, 0, 0]
 dx = [0, 0, -1, 1]
-
-def bfs(i, j):
-    queue = deque()
-    queue.append((i, j))
-    graph[i][j] = 0
-    cnt = 1
+def bfs():
     while queue:
         y, x = queue.popleft()
         for l in range(4):
             yy = dy[l] + y
             xx = dx[l] + x
-            if 0 <= yy < n and 0 <= xx < n and graph[yy][xx] == 1:
-                graph[yy][xx] = 0
+            if 0 <= yy < n and 0 <= xx < m and graph[yy][xx] == 0:
+                graph[yy][xx] = graph[y][x] + 1
                 queue.append((yy, xx))
-                cnt += 1
-    return cnt
-
-result = []
+flag = True # 토마토가 미리 익어있는 상황 체크
+queue = deque()
 for i in range(n):
-    for j in range(n):
+    for j in range(m):
         if graph[i][j] == 1:
-            result.append(bfs(i,j))
+            queue.append((i, j))
 
-result.sort()
-print(len(result))
-print(*result, sep='\n')
+bfs()
+flag = False
+max = -2
+for i in range(n):
+    for j in range(m):
+        if graph[i][j] == 0:
+            flag = True
+        if graph[i][j] > max:
+            max = graph[i][j]
+
+if flag: # 모두 익지 못하는 상태
+    print(-1)
+else:
+    if max == 1: # 최댓값이 1이라면 모두 익어있는 상태
+        print(0)
+    else:
+        print(max-1)
+
+
+
+
 
 
 

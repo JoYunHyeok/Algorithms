@@ -52,5 +52,48 @@ else: print(result-1) # 결과 출력
 
 
 
+# [복습] 백준7576 토마토
+from collections import deque
+from sys import stdin
+input = stdin.readline
+m, n = map(int, input().split())
+graph = []
+for _ in range(n):
+    graph.append(list(map(int, input().split())))
 
+dy = [-1, 1, 0, 0]
+dx = [0, 0, -1, 1]
+def bfs():
+    while queue:
+        y, x = queue.popleft()
+        for l in range(4):
+            yy = dy[l] + y
+            xx = dx[l] + x
+            if 0 <= yy < n and 0 <= xx < m and graph[yy][xx] == 0:
+                graph[yy][xx] = graph[y][x] + 1
+                queue.append((yy, xx))
 
+flag = True # 토마토가 미리 익어있는 상황 체크
+queue = deque()
+for i in range(n):
+    for j in range(m):
+        if graph[i][j] == 1:
+            queue.append((i, j))
+
+bfs()
+flag = False
+max = -2
+for i in range(n):
+    for j in range(m):
+        if graph[i][j] == 0:
+            flag = True
+        if graph[i][j] > max:
+            max = graph[i][j]
+
+if flag: # 모두 익지 못하는 상태
+    print(-1)
+else:
+    if max == 1: # 최댓값이 1이라면 모두 익어있는 상태
+        print(0)
+    else:
+        print(max-1)
