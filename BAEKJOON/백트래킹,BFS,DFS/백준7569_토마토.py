@@ -55,3 +55,61 @@ if isTrue == True:
     print(-1)
 else:
     print(max_num - 1)
+
+# [복습]
+# 백준7569 토마토
+from collections import deque
+from sys import stdin
+input = stdin.readline
+m, n, h = map(int, input().split())
+
+graph = []
+for _ in range(h):
+    a = []
+    for _ in range(n):
+        a.append(list(map(int, input().split())))
+    graph.append(a)
+
+# print(graph)
+dy = [0 , 0, -1, 1, 0, 0]
+dx = [0, 0, 0, 0, -1, 1]
+dh = [-1, 1, 0, 0, 0, 0]
+
+def bfs():
+    while queue:
+        z, y, x = queue.popleft()
+        for l in range(6):
+            zz = dh[l] + z
+            yy = dy[l] + y
+            xx = dx[l] + x
+            if 0<=zz<h and 0<=yy<n and 0<=xx<m and graph[zz][yy][xx] == 0:
+                queue.append((zz, yy, xx))
+                graph[zz][yy][xx] = graph[z][y][x] + 1
+
+
+queue = deque()
+for k in range(h):
+    for i in range(n):
+        for j in range(m):
+            if graph[k][i][j] == 1:
+                queue.append((k,i,j))
+
+bfs()
+
+flag = False
+max = -2
+for k in range(h):
+    for i in range(n):
+        for j in range(m):
+            if graph[k][i][j] == 0:
+                flag = True
+            if graph[k][i][j] > max:
+                max = graph[k][i][j]
+
+if flag:
+    print(-1)
+else:
+    if max == 1:
+        print(0)
+    else:
+        print(max-1)
