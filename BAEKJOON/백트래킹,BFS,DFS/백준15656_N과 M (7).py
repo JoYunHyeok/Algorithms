@@ -7,14 +7,13 @@ array = list(map(int, input().split()))
 array.sort()
 
 s = []
-def dfs(start):
+def dfs():
     if len(s) == M:
         print(*s, sep=' ')
         return
 
-    for i in range(start, N):
-        if array[i] not in s:
-            s.append(array[i])
-            dfs(i+1)
-            s.pop()
-dfs(0)
+    for i in range(N):
+        s.append(array[i])
+        dfs()
+        s.pop()
+dfs()
