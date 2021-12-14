@@ -10,7 +10,7 @@ for _ in range(N):
 
 def dfs(i):
     if False not in visited:
-        result.append([sum(s),i])
+        result.append([sum(s), i])
 
     for x in range(len(graph[i])):
         if not visited[x] and graph[i][x] > 0: #방문한적없고 0이 아닌 경우
@@ -20,18 +20,27 @@ def dfs(i):
             s.pop()
             visited[x] = False
 
-aa = []
-for i in range(N):
+sum_result = []
+for start in range(N):
     result = []
     s = []
     visited = [False] * N
-    visited[i] = True
-    dfs(i)
-    visited[i] = False
-    print(result)
-    for to, last in result:
-        if graph[last][i] != 0:
-            to += graph[last][i]
-            aa.append(to)
+    visited[start] = True
+    dfs(start)
+    visited[start] = False
 
-print(min(aa))
+    for total, end in result: # 마지막 방문 end -> start의 값도 더해준다.
+        if graph[end][start] != 0:
+            total += graph[end][start]
+            sum_result.append(total)
+
+print(min(sum_result))
+
+
+'''
+4
+0 10 15 20
+5 0 9 10
+6 13 0 12
+8 8 9 0
+'''
