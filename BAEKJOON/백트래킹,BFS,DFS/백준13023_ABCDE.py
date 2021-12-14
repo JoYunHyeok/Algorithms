@@ -1,38 +1,43 @@
-# from collections import deque
-# from sys import stdin
-# input = stdin.readline
-#
-# N, M = map(int, input().split())
-# a_list =[[] for _ in range(N)]
-#
-#
-# for _ in range(M):
-#     a, b = map(int, input().split())
-#     a_list[a].append(b)
-#     a_list[b].append(a)
-#
-# def bfs(start):
-#     visited = [0] * N
-#     q.append([start, visited])
-#
-#     visited[start] = 1
-#     while q:
-#         x, visited = q.popleft()
-#         for xx in a_list[x]:
-#             if not visited[xx]:
-#                 copy_visited = visited.copy()
-#                 copy_visited[xx] = visited[x] + 1
-#                 q.append([xx, copy_visited])
-#
-#     if max(visited) == 5:
-#         print(1)
-#         exit()
-#
-# q = deque()
-# for i in range(N):
-#     bfs(i)
-#
-# print(0)
+'''
+틀린 답
+'''
+from collections import deque
+from sys import stdin
+input = stdin.readline
+
+N, M = map(int, input().split())
+a_list =[[] for _ in range(N)]
+
+
+for _ in range(M):
+    a, b = map(int, input().split())
+    a_list[a].append(b)
+    a_list[b].append(a)
+
+def bfs(start):
+    visited = [0] * N
+    q.append([start, visited])
+
+    visited[start] = 1
+    while q:
+        x, visited = q.popleft()
+
+        if max(visited) == 5:
+            print(1)
+            exit()
+
+        for xx in a_list[x]:
+            if not visited[xx]:
+                copy_visited = visited.copy()
+                copy_visited[xx] = visited[x] + 1
+                q.append([xx, copy_visited])
+
+
+q = deque()
+for i in range(N):
+    bfs(i)
+
+print(0)
 
 '''
 bfs풀이

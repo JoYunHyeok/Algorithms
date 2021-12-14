@@ -21,6 +21,7 @@ while q:
             K -= 1
             q.append(xx)
 
+# print(visited)
 result = 0
 for k, v in visited.items():
     result += v

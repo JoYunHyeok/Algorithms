@@ -19,7 +19,6 @@ def dfs(i, check):
             result.extend(list(check))
             return
 
-
 N = int(input())
 graph = defaultdict(list)
 for i in range(1, N+1):
