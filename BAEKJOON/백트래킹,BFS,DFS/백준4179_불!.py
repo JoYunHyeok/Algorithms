@@ -50,10 +50,6 @@ def bfs():
                     if graph[yy][xx] == '.' and visited[yy][xx] in (0, 7):
                         visited[yy][xx] = -1
                         q.append((yy, xx, 'F', 0))
-                    if visited[yy][xx] == 7 and graph[yy][xx] == 'J':
-                        visited[yy][xx] = -1
-                        q.append((yy, xx, 'F', 0))
-                        # print("불 : ", (yy, xx))
 
     print("IMPOSSIBLE")
     return
