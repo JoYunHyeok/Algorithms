@@ -11,6 +11,7 @@ input = stdin.readline
 = 행마다 조건이 만족하는, 알맞게 어디에 배치해야 되는지 위치를 구하는것으로 구현 
 '''
 def check(x):
+    # 이전 행에서 놓았던 모든 Queen에 대해서 검증
     for i in range(x):
         if row[x] == row[i]: # 수직에 겹치는지
             return False
@@ -24,9 +25,12 @@ def dfs(x):
     if x == n:
         result += 1
     else:
+        # x번째 행의 각 열에 퀸을 둔다고 가정
         for i in range(n):
             row[x] = i
+            # 해당 위체에 퀸을 두어도 괜찮은 경우
             if check(x):
+                # 다음 행으로 넘어가기
                 dfs(x + 1)
 
 
