@@ -53,18 +53,18 @@ for _ in range(N):
 
 dy = [-1, 1, 0, 0]
 dx = [0, 0, -1, 1]
-
+visited = [[[0] * 2 for _ in range(M)] for _ in range(N)] # 3차원 배열로 시작, 마지막 원소는 벽을 부술 수 있는 상태
 def bfs():
-    visited = [[[0] * 2 for _ in range(M)] for _ in range(N)] # 3차원 배열로 시작, 마지막 원소는 벽을 부술 수 있는 상태
+
     q = deque()
     q.append((0, 0, 1)) # 벽을 부술 수 있는 상태에서 시작
     visited[0][0][1] = 1
 
     while q:
         y, x, w = q.popleft()
-        if y == N-1 and x == M-1:
-            print(visited[y][x][w])
-            return
+        # if y == N-1 and x == M-1:
+        #     print(visited[y][x][w])
+        #     return
 
         for l in range(4):
             yy = dy[l] + y
@@ -76,10 +76,20 @@ def bfs():
                 elif graph[yy][xx] == 0 and not visited[yy][xx][w]:
                     visited[yy][xx][w] = visited[y][x][w] + 1
                     q.append((yy, xx, w))
-    print(-1)
+    # print(-1)
     return
 
 bfs()
+
+
+if visited[N-1][M-1][0] == 0 and visited[N-1][M-1][1] == 0:
+    print(-1)
+elif visited[N-1][M-1][0] == 0 and visited[N-1][M-1][1] > 0:
+    print(visited[N-1][M-1][1])
+else:
+    print(visited[N-1][M-1][0])
+
+
 
 '''
 벽부수고이동하기 문제
