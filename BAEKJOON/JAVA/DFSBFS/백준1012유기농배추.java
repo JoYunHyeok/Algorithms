@@ -13,7 +13,7 @@ public class 백준1012유기농배추 {
    static int[] dy = {-1, 1, 0, 0};
    static int[] dx = {0, 0, -1, 1};
    
-
+   
    static void bfs(int y, int x) {
       // TODO Auto-generated method stub
       Queue<int[]> q = new LinkedList<int[]>();
@@ -34,7 +34,6 @@ public class 백준1012유기농배추 {
                }
             }
          }
-         
       }
    }
    
@@ -50,7 +49,7 @@ public class 백준1012유기농배추 {
          m = Integer.parseInt(st.nextToken()); // 가로
          n = Integer.parseInt(st.nextToken()); // 세로
          k = Integer.parseInt(st.nextToken());
-
+         
          graph = new int[n][m]; 
          visited = new boolean[n][m];
          
