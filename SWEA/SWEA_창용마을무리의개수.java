@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class SWEA_하나로 {
+public class SWEA_창용마을무리의개수 {
 	static int TC;
 	static int[] parent;
 	
