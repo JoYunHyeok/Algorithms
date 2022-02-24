@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -14,7 +12,7 @@ import java.util.StringTokenizer;
 public class SWEA_contact_인접행렬풀이 {
 	static int TC = 10;
 	static int[][] graph;
-	static List<int[]> list;
+	static int ans;
 
 	//dfs인 경우 주석풀기
 	static boolean[] visited;
@@ -35,49 +33,37 @@ public class SWEA_contact_인접행렬풀이 {
 				graph[a][b] = 1;
 			}
 
-			list = new ArrayList<>();
 			visited = new boolean[101];
-			bfs(start, 0);
-			
-			Collections.sort(list, new Comparator<int[]>() {
+			bfs(start);
 
-				@Override
-				public int compare(int[] o1, int[] o2) {
-					if (o1[1] == o2[1]) {
-						return o1[0] - o2[0];
-					}
-					return o1[1] - o2[1];
-				}
-			});
-
-//			for (int[] i : list) {
-//				System.out.println(i[0] + "," + i[1]);
-//			}
-
-			System.out.printf("#%d %d \n", tc, list.get(list.size() - 1)[0]);
+			System.out.printf("#%d %d \n", tc, ans);
 		}
 
 	}
 
-	public static void bfs(int start, int cnt) {
-		Queue<int[]> q = new LinkedList<>();
+	public static void bfs(int start) {
+		Queue<Integer> q = new LinkedList<>();
 		boolean[] visited = new boolean[101];
 
-		q.offer(new int[] { start, cnt });
+		q.offer(start);
 		visited[start] = true;
 
 		while (!q.isEmpty()) {
-			int curr = q.peek()[0];
-			int currCnt = q.peek()[1];
-			q.poll();
-
-			for (int i = 1; i < 101; i++) {
-				if (!visited[i] && graph[curr][i] == 1) {
-					q.offer(new int[] { i, currCnt + 1 });
-					list.add(new int[] { i, currCnt + 1 });
-					visited[i] = true;
+			int size = q.size();
+			int tmp = 0;
+			
+			for(int s=0; s<size; s++) {
+				int curr = q.poll();
+				tmp = Math.max(tmp, curr);
+				for (int i = 1; i < 101; i++) {
+					if (!visited[i] && graph[curr][i] == 1) {
+						q.offer(i);
+						visited[i] = true;
+					}
 				}
 			}
+			ans = tmp;
+			
 		}
 	}
 	
